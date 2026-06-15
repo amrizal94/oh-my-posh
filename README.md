@@ -7,3 +7,12 @@ if failed to load the file, follow step below:
 Set-ExetionPolicy RemoteSigned -Scope currentUser
 Unblock-File -Path $PROFILE
 ```
+
+## Windows Terminal settings
+
+File `windows-terminal-settings.json` is the Windows Terminal config (keybindings, color scheme, font).
+
+- Font used: **0xProto Nerd Font** — install it first (any Nerd Font works).
+- To apply: copy it to
+  `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
+  (close Windows Terminal first, then replace the file).

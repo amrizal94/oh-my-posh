@@ -16,3 +16,29 @@ File `windows-terminal-settings.json` is the Windows Terminal config (keybinding
 - To apply: copy it to
   `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
   (close Windows Terminal first, then replace the file).
+
+## macOS (zsh + Powerlevel10k)
+
+Folder `macos/` contains the zsh terminal setup (matches the prompt used on the Macs).
+
+- `macos/.zshrc` — clean zsh config (Oh My Zsh + Powerlevel10k theme + plugins). No secrets/machine-specific paths.
+- `macos/.p10k.zsh` — Powerlevel10k prompt configuration.
+
+**Setup on a new Mac:**
+```bash
+# 1. Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# 2. Powerlevel10k + plugins
+ZC=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZC/themes/powerlevel10k
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $ZC/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $ZC/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/zdharma-continuum/fast-syntax-highlighting $ZC/plugins/fast-syntax-highlighting
+git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete $ZC/plugins/zsh-autocomplete
+# 3. Copy configs from this repo
+cp macos/.zshrc ~/.zshrc
+cp macos/.p10k.zsh ~/.p10k.zsh
+# 4. Nerd Font
+brew install --cask font-meslo-lg-nerd-font
+```
+Then set the terminal font to **MesloLGS Nerd Font** (Terminal/iTerm → Preferences → Profile → Font) and restart the terminal.

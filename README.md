@@ -19,15 +19,23 @@ File `windows-terminal-settings.json` is the Windows Terminal config (keybinding
 
 ## macOS (zsh + Powerlevel10k)
 
-Folder `macos/` contains the zsh terminal setup (matches the prompt used on the Macs).
+Folder `macos/` berisi setup terminal zsh untuk kedua Mac.
 
-- `macos/.zshrc` — clean zsh config (Oh My Zsh + Powerlevel10k theme + plugins). No secrets/machine-specific paths.
-- `macos/.p10k.zsh` — Powerlevel10k prompt configuration.
+```
+macos/
+├─ .p10k.zsh          # konfigurasi prompt Powerlevel10k (sama di kedua mesin)
+├─ macbook/.zshrc     # MacBook (Intel) — minimal & bersih (rekomendasi sbg basis)
+└─ macmini/.zshrc     # Mac mini (Apple Silicon) — lengkap dgn dev env (nvm/conda/sdkman/flutter)
+```
 
-**Setup on a new Mac:**
+> **Secrets** (token, API key) **tidak** disimpan di sini. Keduanya membaca `~/.secrets`
+> (chmod 600, tidak pernah di-commit). Buat file itu manual di tiap mesin.
+
+**Setup di Mac baru:**
 ```bash
 # 1. Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # 2. Powerlevel10k + plugins
 ZC=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZC/themes/powerlevel10k
@@ -35,10 +43,16 @@ git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $ZC/plugins
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $ZC/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zdharma-continuum/fast-syntax-highlighting $ZC/plugins/fast-syntax-highlighting
 git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete $ZC/plugins/zsh-autocomplete
-# 3. Copy configs from this repo
-cp macos/.zshrc ~/.zshrc
+
+# 3. Salin config (pilih sesuai mesin)
+cp macos/macbook/.zshrc ~/.zshrc      # atau macos/macmini/.zshrc
 cp macos/.p10k.zsh ~/.p10k.zsh
+
 # 4. Nerd Font
 brew install --cask font-meslo-lg-nerd-font
+
+# 5. (opsional) buat ~/.secrets untuk token/API key
+#    contoh isi:  export KAGGLE_API_TOKEN="..."
+#    lalu: chmod 600 ~/.secrets
 ```
-Then set the terminal font to **MesloLGS Nerd Font** (Terminal/iTerm → Preferences → Profile → Font) and restart the terminal.
+Set font terminal ke **MesloLGS Nerd Font** (Terminal/iTerm → Preferences → Profile → Font), lalu buka terminal baru.

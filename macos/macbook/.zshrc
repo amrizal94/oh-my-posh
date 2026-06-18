@@ -17,3 +17,7 @@ source $ZSH/oh-my-zsh.sh
 
 # --- preserved from previous .zshrc ---
 export PATH="$HOME/.local/bin:$PATH"
+
+
+# Load private secrets (not in any repo)
+[ -f ~/.secrets ] && source ~/.secrets
